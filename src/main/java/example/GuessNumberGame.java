@@ -5,18 +5,17 @@ import java.util.Arrays;
 import java.util.List;
 
 public class GuessNumberGame {
-    AnswerGenerator answerGenerator;
+    private int[] answers;
 
     public GuessNumberGame(AnswerGenerator morkAnswerGenerator) {
-        this.answerGenerator = morkAnswerGenerator;
+        this.answers = morkAnswerGenerator.generator();
     }
 
-    public String guess(int[] guessNumber) {
-        int[] answer = answerGenerator.generator();
-        if (Arrays.equals(answer, guessNumber)) {
+    public String guess(int[] guessNumbers) {
+        if (Arrays.equals(answers, guessNumbers)) {
             return "4A0B";
         } else {
-            return count(guessNumber);
+            return count(guessNumbers);
         }
 
     }
@@ -27,7 +26,6 @@ public class GuessNumberGame {
         List<Integer> answerNoIncludeTheSame = new ArrayList<>();
         List<Integer> guessNoIncludeTheSame = new ArrayList<>();
 
-        int[] answers = answerGenerator.generator();
         for (int index = 0; index < guessNumbers.length; index++) {
             if (answers[index] == guessNumbers[index]) {
                 countA++;
@@ -37,7 +35,7 @@ public class GuessNumberGame {
             }
         }
         for (int index = 0; index < answerNoIncludeTheSame.size(); index++) {
-            if (answerNoIncludeTheSame.contains(answerNoIncludeTheSame.get(index)))
+            if (answerNoIncludeTheSame.contains(guessNoIncludeTheSame.get(index)))
                 countB++;
         }
         return countA + "A" + countB + "B";
