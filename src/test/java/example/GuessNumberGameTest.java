@@ -36,4 +36,64 @@ public class GuessNumberGameTest {
         //then
         assertEquals("1A1B", actual);
     }
+
+    @Test
+    void should_return_0A0B_when_guess_number_given_answer_is_1234_and_guess_number_is_5678() {
+        //given
+        AnswerGenerator morkAnswerGenerator = Mockito.mock(AnswerGenerator.class);
+        given(morkAnswerGenerator.generator()).willReturn(new int[]{1, 2, 3, 4});
+        int[] guessNumber = {5, 6, 7, 8};
+
+        //when
+        GuessNumberGame guessNumberGame = new GuessNumberGame(morkAnswerGenerator);
+        String actual = guessNumberGame.guess(guessNumber);
+
+        //then
+        assertEquals("0A0B", actual);
+    }
+
+    @Test
+    void should_return_2A2B_when_guess_number_given_answer_is_1234_and_guess_number_is_1243() {
+        //given
+        AnswerGenerator morkAnswerGenerator = Mockito.mock(AnswerGenerator.class);
+        given(morkAnswerGenerator.generator()).willReturn(new int[]{1, 2, 3, 4});
+        int[] guessNumber = {1, 2, 4, 3};
+
+        //when
+        GuessNumberGame guessNumberGame = new GuessNumberGame(morkAnswerGenerator);
+        String actual = guessNumberGame.guess(guessNumber);
+
+        //then
+        assertEquals("2A2B", actual);
+    }
+
+    @Test
+    void should_return_0A2B_when_guess_number_given_answer_is_1234_and_guess_number_is_2107() {
+        //given
+        AnswerGenerator morkAnswerGenerator = Mockito.mock(AnswerGenerator.class);
+        given(morkAnswerGenerator.generator()).willReturn(new int[]{1, 2, 3, 4});
+        int[] guessNumber = {2, 1, 0, 7};
+
+        //when
+        GuessNumberGame guessNumberGame = new GuessNumberGame(morkAnswerGenerator);
+        String actual = guessNumberGame.guess(guessNumber);
+
+        //then
+        assertEquals("0A2B", actual);
+    }
+
+    @Test
+    void should_return_0A4B_when_guess_number_given_answer_is_1234_and_guess_number_is_4321() {
+        //given
+        AnswerGenerator morkAnswerGenerator = Mockito.mock(AnswerGenerator.class);
+        given(morkAnswerGenerator.generator()).willReturn(new int[]{1, 2, 3, 4});
+        int[] guessNumber = {4, 3, 2, 1};
+
+        //when
+        GuessNumberGame guessNumberGame = new GuessNumberGame(morkAnswerGenerator);
+        String actual = guessNumberGame.guess(guessNumber);
+
+        //then
+        assertEquals("0A4B", actual);
+    }
 }
