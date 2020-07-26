@@ -16,15 +16,19 @@ public class GuessNumberGame {
         AnswerGeneratorImpl answerGenerator = new AnswerGeneratorImpl();
         GuessNumberGame guessNumberGame = new GuessNumberGame(answerGenerator);
         int[] answer = answerGenerator.getAnswers();
+        System.out.print("正确答案:");
         for (int i : answer) {
             System.out.print(i);
         }
         System.out.println();
-        guessNumberGame.play();
+        System.out.println(guessNumberGame.play());
     }
 
     public String guess(int[] guessNumbers) {
         times++;
+        String validaResult = guessNumbersValidator.validate(guessNumbers);
+        if (validaResult != null)
+            return validaResult;
         return count(guessNumbers);
 
     }
@@ -48,24 +52,20 @@ public class GuessNumberGame {
         return rightPositionRightNumberCounter + "A" + wrongPositionRightNumberCounter + "B";
     }
 
-    public void play() {
+    public String play() {
         System.out.println("Game Begin!");
         InputGuessNumbers inputGuessNumbers = new InputGuessNumbers();
         String guessResult = null;
 
         while (times < 6 && !"4A0B".equals(guessResult)) {
             int[] guessNumbers = inputGuessNumbers.inputGuessNumber();
-            String validaResult = guessNumbersValidator.validate(guessNumbers);
-            if (validaResult == null) {
-                guessResult = guess(guessNumbers);
-                System.out.println(guessResult);
-            } else
-                System.out.println(validaResult);
+            guessResult = guess(guessNumbers);
+            System.out.println(guessResult);
         }
         if (times >= 6) {
-            System.out.print("Game Over! You are lose!\n");
+            return "Game Over! You are lose!\n";
         } else {
-            System.out.print("Congratulation! You are win!\n");
+            return "Congratulation! You are win!\n";
         }
     }
 
