@@ -1,7 +1,7 @@
 package example;
 
 public class GuessNumbersValidator {
-    public String validator(int[] guessNumbers) {
+    public String validate(int[] guessNumbers) {
         String validateResult = null;
         if (guessNumbers.length < 4 || hasSameNumber(guessNumbers) || hasNotInRangeNumber(guessNumbers))
             validateResult = "Wrong Input，Input again";

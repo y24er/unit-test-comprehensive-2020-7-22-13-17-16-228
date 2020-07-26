@@ -55,7 +55,7 @@ public class GuessNumberGame {
 
         while (times < 6 && !"4A0B".equals(guessResult)) {
             int[] guessNumbers = inputGuessNumbers.inputGuessNumber();
-            String validaResult = guessNumbersValidator.validator(guessNumbers);
+            String validaResult = guessNumbersValidator.validate(guessNumbers);
             if (validaResult == null) {
                 guessResult = guess(guessNumbers);
                 System.out.println(guessResult);
