@@ -21,8 +21,9 @@ public class AnswerGeneratorImpl implements AnswerGenerator {
     private boolean contains(int[] answers, int randomNumber) {
         boolean isIn = false;
         for (int answer : answers) {
-            if (randomNumber == answer)
+            if (randomNumber == answer) {
                 isIn = true;
+            }
         }
         return isIn;
     }

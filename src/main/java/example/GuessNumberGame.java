@@ -24,16 +24,17 @@ public class GuessNumberGame {
         System.out.println(guessNumberGame.play());
     }
 
-    public String guess(int[] guessNumbers) {
+    public String guess(int... guessNumbers) {
         times++;
         String validaResult = guessNumbersValidator.validate(guessNumbers);
-        if (validaResult != null)
+        if (validaResult != null) {
             return validaResult;
+        }
         return count(guessNumbers);
 
     }
 
-    public String count(int[] guessNumbers) {
+    public String count(int... guessNumbers) {
         int rightPositionRightNumberCounter = 0;
         int wrongPositionRightNumberCounter = 0;
 
@@ -45,8 +46,9 @@ public class GuessNumberGame {
             if (answers[index] == guessNumbers[index]) {
                 rightPositionRightNumberCounter++;
             } else {
-                if (answerList.contains(guessNumbers[index]))
+                if (answerList.contains(guessNumbers[index])) {
                     wrongPositionRightNumberCounter++;
+                }
             }
         }
         return rightPositionRightNumberCounter + "A" + wrongPositionRightNumberCounter + "B";
