@@ -3,21 +3,35 @@ package example;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GuessNumberGame implements AnswerGenerator {
+public class GuessNumberGame {
     private int[] answers;
+    private int times;
+    private GuessNumbersValidator guessNumbersValidator = new GuessNumbersValidator();
 
-    public GuessNumberGame(AnswerGenerator morkAnswerGenerator) {
-        this.answers = morkAnswerGenerator.generator();
+    public GuessNumberGame(AnswerGenerator answerGenerator) {
+        this.answers = answerGenerator.generator();
+    }
+
+    public static void main(String[] args) {
+        AnswerGeneratorImpl answerGenerator = new AnswerGeneratorImpl();
+        GuessNumberGame guessNumberGame = new GuessNumberGame(answerGenerator);
+        int[] answer = answerGenerator.getAnswers();
+        for (int i : answer) {
+            System.out.print(i);
+        }
+        System.out.println();
+        guessNumberGame.play();
     }
 
     public String guess(int[] guessNumbers) {
+        times++;
         return count(guessNumbers);
 
     }
 
     public String count(int[] guessNumbers) {
-        int countA = 0;
-        int countB = 0;
+        int rightPositionRightNumberCounter = 0;
+        int wrongPositionRightNumberCounter = 0;
 
         List<Integer> answerList = new ArrayList<>();
         for (int answer : answers) {
@@ -25,22 +39,35 @@ public class GuessNumberGame implements AnswerGenerator {
         }
         for (int index = 0; index < guessNumbers.length; index++) {
             if (answers[index] == guessNumbers[index]) {
-                countA++;
+                rightPositionRightNumberCounter++;
             } else {
                 if (answerList.contains(guessNumbers[index]))
-                    countB++;
+                    wrongPositionRightNumberCounter++;
             }
         }
-        return countA + "A" + countB + "B";
+        return rightPositionRightNumberCounter + "A" + wrongPositionRightNumberCounter + "B";
     }
 
-    @Override
-    public int[] generator() {
-        int[] answers = new int[4];
-        for (int i = 0; i < 4; i++) {
-            int answer = (int) (Math.random() * 9);
-            answers[i] = answer;
+    public void play() {
+        System.out.println("Game Begin!");
+        InputGuessNumbers inputGuessNumbers = new InputGuessNumbers();
+        String guessResult = null;
+
+        while (times < 6 && !"4A0B".equals(guessResult)) {
+            int[] guessNumbers = inputGuessNumbers.inputGuessNumber();
+            String validaResult = guessNumbersValidator.validator(guessNumbers);
+            if (validaResult == null) {
+                guessResult = guess(guessNumbers);
+                System.out.println(guessResult);
+            } else
+                System.out.println(validaResult);
         }
-        return answers;
+        if (times >= 6) {
+            System.out.print("Game Over! You are lose!\n");
+        } else {
+            System.out.print("Congratulation! You are win!\n");
+        }
     }
+
+
 }
