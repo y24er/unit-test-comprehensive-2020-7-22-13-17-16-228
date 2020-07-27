@@ -20,8 +20,6 @@ public class GuessNumberGame {
         for (int i : answer) {
             System.out.print(i);
         }
-        System.out.println();
-        System.out.println(guessNumberGame.play());
     }
 
     public String guess(int... guessNumbers) {
@@ -54,7 +52,11 @@ public class GuessNumberGame {
         return rightPositionRightNumberCounter + "A" + wrongPositionRightNumberCounter + "B";
     }
 
-    public String play() {
+    public void play() {
+        for (int answer : answers) {
+            System.out.print(answer);
+        }
+        System.out.println();
         System.out.println("Game Begin!");
         InputGuessNumbers inputGuessNumbers = new InputGuessNumbers();
         String guessResult = null;
@@ -65,9 +67,9 @@ public class GuessNumberGame {
             System.out.println(guessResult);
         }
         if (times >= 6) {
-            return "Game Over! You are lose!\n";
+            System.out.println("Game Over! You are lose!\n");
         } else {
-            return "Congratulation! You are win!\n";
+            System.out.println("Congratulation! You are win!\n");
         }
     }
 

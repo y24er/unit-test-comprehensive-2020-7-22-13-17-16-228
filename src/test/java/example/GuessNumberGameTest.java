@@ -3,6 +3,8 @@ package example;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.BDDMockito.given;
 
@@ -96,4 +98,20 @@ public class GuessNumberGameTest {
         //then
         assertEquals("0A4B", actual);
     }
+
+    @Test
+    void should_game_result_when_play_given_guess_numbers() throws IOException {
+        //given
+        GuessNumberGame guessNumberGame = new GuessNumberGame(new AnswerGeneratorImpl());
+
+        //when
+        guessNumberGame.play();
+        //需要用Scanner输入数字，在help->Edit Custome VM Options里设置-Deditable.java.test.console=true
+
+        //then
+        //获取最终结果，我还得查一下怎么处理
+//        assertEquals("Game Over! You are lose!");
+
+    }
+
 }
