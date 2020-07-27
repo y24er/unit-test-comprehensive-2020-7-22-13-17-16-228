@@ -14,7 +14,7 @@ public class GuessNumberGame {
 
     public static void main(String[] args) {
         AnswerGeneratorImpl answerGenerator = new AnswerGeneratorImpl();
-        GuessNumberGame guessNumberGame = new GuessNumberGame(answerGenerator);
+        new GuessNumberGame(answerGenerator);
         int[] answer = answerGenerator.getAnswers();
         System.out.print("正确答案:");
         for (int i : answer) {
